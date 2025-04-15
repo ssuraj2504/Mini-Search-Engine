@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results for "{{ query }}"</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 40px 20px;
+            color: #333;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .result {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .result:hover {
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+        }
+
+        .result a {
+            font-size: 18px;
+            font-weight: 600;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+
+        .snippet {
+            margin-top: 8px;
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        mark {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        .no-results {
+            font-size: 18px;
+            color: #888;
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 15px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            .result a {
+                font-size: 16px;
+            }
+
+            .snippet {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search Results for "<em>{{ query }}</em>"</h1>
+
+        {% if results %}
+            {% for item in results %}
+                <div class="result">
+                    <a href="{{ url_for('view_article', filename=item.filename) }}">{{ item.filename }}</a>
+                    <div class="snippet">{{ item.snippet|safe }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-results">No results found for your search.</p>
+        {% endif %}
+
+        <a class="back-btn" href="/">🔙 Back to Search</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+This is a sample data folder containing text files for indexing and searching using a Flask mini search engine.

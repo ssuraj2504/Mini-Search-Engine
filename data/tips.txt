@@ -1,0 +1,1 @@
+Use functions to keep your code organized. Comment your code for better readability.
